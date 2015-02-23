@@ -165,7 +165,19 @@ Yii::registerAutoloader(['Yii', 'autoload']);
 // create the dependency injection container
 Yii::$container = new yii\di\Container;
 ```
-
+After Integrating Please add below lines in yii2/config/web.php config
+```php
+'log' => [
+            'logger' => Yii::createObject('yii\log\Logger'), // this is important
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+```        
 That's all! Now in any part of your code, you can use `Yii::$app` to access the Yii 2 application instance, while
 `Yii::app()` will give you the Yii 1 application instance:
 
